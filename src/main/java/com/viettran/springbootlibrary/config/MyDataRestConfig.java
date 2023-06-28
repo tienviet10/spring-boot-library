@@ -1,6 +1,7 @@
 package com.viettran.springbootlibrary.config;
 
 import com.viettran.springbootlibrary.entity.Book;
+import com.viettran.springbootlibrary.entity.Message;
 import com.viettran.springbootlibrary.entity.Review;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -18,8 +19,10 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         // disable HTTP methods for Book: PUT, POST and DELETE
         config.exposeIdsFor(Book.class);
         config.exposeIdsFor(Review.class);
+        config.exposeIdsFor(Message.class);
         disableHttpMethods(Book.class, config, theUnsupportedActions);
         disableHttpMethods(Review.class, config, theUnsupportedActions);
+        disableHttpMethods(Message.class, config, theUnsupportedActions);
 
         /* Configure CORS Mapping */
         cors.addMapping(config.getBasePath() + "/**")
