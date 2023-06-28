@@ -1,7 +1,6 @@
 package com.viettran.springbootlibrary.service;
 
 
-import com.viettran.springbootlibrary.dao.BookRepository;
 import com.viettran.springbootlibrary.dao.ReviewRepository;
 import com.viettran.springbootlibrary.entity.Review;
 import com.viettran.springbootlibrary.requestmodels.ReviewRequest;
