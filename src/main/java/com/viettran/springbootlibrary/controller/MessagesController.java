@@ -7,24 +7,25 @@ import com.viettran.springbootlibrary.utils.ExtractJWT;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://localhost:3000")
 @RestController
 @RequestMapping("/api/messages")
 public class MessagesController {
-    private MessageService messageService;
+    private final MessageService messageService;
+
     @Autowired
     public MessagesController(MessageService messageService) {
         this.messageService = messageService;
     }
 
     @PostMapping("/secure/add/message")
-    public void postMessage(@RequestHeader(value="Authorization") String token, @RequestBody Message messageRequest) {
+    public void postMessage(@RequestHeader(value = "Authorization") String token, @RequestBody Message messageRequest) {
         String userEmail = ExtractJWT.payloadJWTExtraction(token, "\"sub\"");
         messageService.postMessage(messageRequest, userEmail);
     }
 
     @PutMapping("/secure/admin/message")
-    public void putMessage(@RequestHeader(value="Authorization") String token, @RequestBody AdminQuestionRequest adminQuestionRequest) throws Exception {
+    public void putMessage(@RequestHeader(value = "Authorization") String token, @RequestBody AdminQuestionRequest adminQuestionRequest) throws Exception {
         String userEmail = ExtractJWT.payloadJWTExtraction(token, "\"sub\"");
         String admin = ExtractJWT.payloadJWTExtraction(token, "\"userType\"");
 
