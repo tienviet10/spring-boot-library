@@ -17,7 +17,7 @@ public class SecurityConfiguration {
         //protect endpoint /api/books
         http.authorizeHttpRequests(requests ->
                         requests
-                                .requestMatchers("/api/books/secure/**", "/api/reviews/secure/**", "/api/messages/secure/**")
+                                .requestMatchers("/api/books/secure/**", "/api/reviews/secure/**", "/api/messages/secure/**", "/api/admin/secure/**")
                                 .authenticated()
                                 .anyRequest().permitAll())
                 .oauth2ResourceServer(oauth2ResourceServer -> oauth2ResourceServer.jwt(Customizer.withDefaults()));
@@ -32,7 +32,7 @@ public class SecurityConfiguration {
         Okta.configureResourceServer401ResponseBody(http);
 
         // we are not using Cookies for session tracking >> disable CSRF
-        http.csrf(csrf->csrf.disable());
+        http.csrf(csrf -> csrf.disable());
 
         return http.build();
     }
